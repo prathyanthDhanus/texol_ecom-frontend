@@ -3,11 +3,20 @@ import "./ButtonStyles.css";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
+  fullWidth?: boolean;  
 }
 
-const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+const Button: React.FC<ButtonProps> = ({ 
+  children, 
+  variant = "primary", 
+  fullWidth = false, 
+  ...props 
+}) => {
   return (
-    <button className="button" {...props}>
+    <button 
+      className={`button button-${variant} ${fullWidth ? 'button-full-width' : ''}`} 
+      {...props}
+    >
       {children}
     </button>
   );
