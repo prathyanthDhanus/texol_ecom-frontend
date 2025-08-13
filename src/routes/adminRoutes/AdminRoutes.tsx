@@ -8,6 +8,10 @@ export const lazyComponents = {
   Unauthorized: lazy(() => import("../../components/statuses/Unauthorized")),
   //------------------- Dashboard Components ----------------------
   Dashboard: lazy(() => import("../../pages/admin/dashboard/index")),
+  //------------------- Auth Components ----------------------
+  Login: lazy(() => import("../../pages/admin/auth/LoginPage")),
+  Register: lazy(() => import("../../pages/admin/auth/RegisterPage")),
+
 };
 
 // Route configuration interface
@@ -41,7 +45,19 @@ export const adminRoutesConfig = {
       component: lazyComponents.Unauthorized,
     },
   ],
+  auth: [
+    //🎯
+    {
+      path: Admin_Path.LOGIN,
+      component: lazyComponents.Login,
+    },
+    {
+      path: Admin_Path.REGISTER,
+      component: lazyComponents.Register,
+    },
+  ],
 } satisfies {
   common: RouteConfig[];
   dashboard: RouteConfig[];
+  auth: RouteConfig[];
 };

@@ -1,24 +1,32 @@
-import React from 'react'
-import 
- {BsFillBellFill, BsFillEnvelopeFill, BsPersonCircle, BsSearch, BsJustify}
- from 'react-icons/bs'
+import React from "react";
+import {
+  BsFillBellFill,
+  BsFillEnvelopeFill,
+  BsPersonCircle,
+  BsSearch,
+  BsJustify,
+} from "react-icons/bs";
 
-function AdminNavbar({OpenSidebar}) {
-  return (
-    <header className='header'>
-        <div className='menu-icon'>
-            <BsJustify className='icon' onClick={OpenSidebar}/>
-        </div>
-        <div className='header-left'>
-            <BsSearch  className='icon'/>
-        </div>
-        <div className='header-right'>
-            <BsFillBellFill className='icon'/>
-            <BsFillEnvelopeFill className='icon'/>
-            <BsPersonCircle className='icon'/>
-        </div>
-    </header>
-  )
+interface AdminNavbarProps {
+  OpenSidebar: () => void;
 }
 
-export default AdminNavbar
+const AdminNavbar: React.FC<AdminNavbarProps> = ({ OpenSidebar }) => {
+  return (
+    <header className="header">
+      <div className="menu-icon">
+        <BsJustify className="icon" onClick={OpenSidebar} />
+      </div>
+      <div className="header-left">
+        <BsSearch className="icon" />
+      </div>
+      <div className="header-right">
+        <BsFillBellFill className="icon" />
+        <BsFillEnvelopeFill className="icon" />
+        <BsPersonCircle className="icon" />
+      </div>
+    </header>
+  );
+};
+
+export default AdminNavbar;

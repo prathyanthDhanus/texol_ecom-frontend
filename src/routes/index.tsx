@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { adminRoutesConfig } from "./adminRoutes/AdminRoutes";
 import { generateRoutes } from "../utils/routes/generateRoutes";
 import RootLayout from "../layouts";
-import SuperAdminLayout from "../layouts/AdminLayout";
+import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
 
 export const useRouter = () => {
@@ -14,13 +14,13 @@ export const useRouter = () => {
         element: <RootLayout />,
         children: [
           // Auth routes
-        //   {
-        //     element: <AuthLayout />,
-        //     children: generateRoutes(adminRoutesConfig.auth),
-        //   },
-          // Super admin routes
           {
-            element: <SuperAdminLayout />,
+            element: <AuthLayout />,
+            children: generateRoutes(adminRoutesConfig.auth),
+          },
+          // Admin routes
+          {
+            element: <AdminLayout />,
             children: [
               ...generateRoutes(adminRoutesConfig.dashboard),
           

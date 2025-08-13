@@ -1,0 +1,82 @@
+.input-group {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.input-field,
+.textarea-field,
+.select-field,
+.search-field {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus,
+.textarea-field:focus,
+.select-field:focus,
+.search-field:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.textarea-field {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.select-field {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1em;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+}
+
+.search-field {
+  padding-right: 3.5rem;
+}
+
+.search-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  padding: 0 1rem;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background-color: #535bf2;
+}
+
+.error-message {
+  display: block;
+  margin-top: 0.25rem;
+  color: #ff4d4f;
+  font-size: 0.875rem;
+}
+
+.error {
+  border-color: #ff4d4f;
+}
