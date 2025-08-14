@@ -26,7 +26,7 @@ const RegisterPage = () => {
       </div>
 
       <div className="auth-form-container">
-        <h1 className="auth-title">Login</h1>
+        <h1 className="auth-title">Register</h1>
         
         {/* Login form */}
         <RegisterForm formik={formik}  isLoading={isLoading}/>
