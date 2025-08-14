@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import type { TypedUseSelectorHook } from "react-redux";
 
 import navigationReducer from "./slices/navigationSlice";
+import categoryReducer from "./slices/categorySlice";
+
 
 export const store = configureStore({
   reducer: {
     navigation: navigationReducer,
+    category:categoryReducer
   },
 });
 

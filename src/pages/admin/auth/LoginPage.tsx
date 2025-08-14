@@ -6,6 +6,7 @@ import LoginImage from "../../../assets/images/2151252489.jpg";
 import LoginForm from "../../../components/forms/auth/login";
 import useLoginForm from "../../../components/forms/auth/login/useLoginForm";
 import { useLogin } from "../../../services/auth";
+import { setRefreshToken, setToken } from "../../../utils/auth/auth";
 import type { LoginFormValues } from "../../../types/auth";
 import { toastSuccess, toastError } from "../../../utils/toast/toast";
 import "./Auth.css";
@@ -32,6 +33,8 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (loginSuccess && loginData) {
+      setToken(loginData.data.accessToken, true);
+      setRefreshToken(loginData.data.refreshToken, true);
       toastSuccess(loginData.message || "Login successful!");
       navigate("/");
     }
