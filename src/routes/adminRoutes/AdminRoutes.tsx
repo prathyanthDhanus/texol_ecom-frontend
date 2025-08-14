@@ -8,6 +8,7 @@ export const lazyComponents = {
   Unauthorized: lazy(() => import("../../components/statuses/Unauthorized")),
   //------------------- Dashboard Components ----------------------
   Dashboard: lazy(() => import("../../pages/admin/dashboard/index")),
+  AddCategory: lazy(() => import("../../pages/admin/category/AddCategory")),
   //------------------- Auth Components ----------------------
   Login: lazy(() => import("../../pages/admin/auth/LoginPage")),
   Register: lazy(() => import("../../pages/admin/auth/RegisterPage")),
@@ -29,6 +30,12 @@ export const adminRoutesConfig = {
     {
       path: Admin_Path.HOME,
       component: lazyComponents.Dashboard,
+      // protected: true,
+      protected: false,
+    },
+    {
+      path: Admin_Path.ADD_CATEGORY,
+      component: lazyComponents.AddCategory,
       // protected: true,
       protected: false,
     },

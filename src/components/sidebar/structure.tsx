@@ -1,5 +1,4 @@
 import {
-  BsCart3,
   BsGrid1X2Fill,
   BsFillArchiveFill,
   BsFillGrid3X3GapFill,
@@ -10,9 +9,9 @@ import {
 } from "react-icons/bs";
 
 export const sidebarStructure = [
-  { name: "Dashboard", link: "/dashboard", icon: <BsGrid1X2Fill className="icon" /> },
+  { name: "Dashboard", link: "/", icon: <BsGrid1X2Fill className="icon" /> },
   { name: "Products", link: "/products", icon: <BsFillArchiveFill className="icon" /> },
-  { name: "Categories", link: "/categories", icon: <BsFillGrid3X3GapFill className="icon" /> },
+  { name: "Categories", link: "/add/category", icon: <BsFillGrid3X3GapFill className="icon" /> },
   { name: "Customers", link: "/customers", icon: <BsPeopleFill className="icon" /> },
   { name: "Inventory", link: "/inventory", icon: <BsListCheck className="icon" /> },
   { name: "Reports", link: "/reports", icon: <BsMenuButtonWideFill className="icon" /> },
