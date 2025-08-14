@@ -20,4 +20,6 @@ export const Admin_Path = {
   ADD_PRODUCT: "/add/product",
   EDIT_PRODUCT: "/edit/product/:id",
   VIEW_PRODUCTS: "/products",
+  VIEW_ORDERS: "/orders",
+  ORDER_DETAIL: "/orders/:orderId",
 } as const;
