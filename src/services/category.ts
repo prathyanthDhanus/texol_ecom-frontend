@@ -5,6 +5,7 @@ import type {
   CategoryFormValues,
   CategoryData,
 } from "../types/category";
+import type { PaginatedResponse } from "../types/pagination";
 
 //・・・・・・・・・・・・・・・ Create Category Api ・・・・・・・・・・・・・・・
 export const useCreateCategory = () => {
@@ -17,16 +18,23 @@ export const useCreateCategory = () => {
 };
 
 //・・・・・・・・・・・・・・・ Get All Categories Api ・・・・・・・・・・・・・・・
-export const useGetCategories = () => {
-  return useQuery<CategoryData[], Error>({
-    queryKey: ["categories"],
+
+export const useGetCategories = (page: number = 1, limit: number = 10) => {
+  return useQuery<PaginatedResponse<CategoryData>, Error>({
+    queryKey: ["categories", page, limit],
     queryFn: async () => {
-      const res = await api.get<{ data: CategoryData[] }>("/category");
-      return res.data.data;
+      const res = await api.get<{ data: CategoryData[]; total: number }>(
+        `/category?page=${page}&limit=${limit}`
+      );
+      return {
+        data: res.data.data,
+        total: res.data.total,
+        page,
+        limit,
+      };
     },
   });
 };
-
 //・・・・・・・・・・・・・・・ Update Category Api ・・・・・・・・・・・・・・・
 export const useUpdateCategory = () => {
   return useMutation<
@@ -49,9 +57,12 @@ export const useRestoreCategory = () => {
     { id: string; data: { isDeleted: boolean } }
   >({
     mutationFn: async ({ id, data }) => {
-      const res = await api.patch<CategoryResponse>(`/category/${id}/restore`, data);
+      const res = await api.patch<CategoryResponse>(
+        `/category/${id}/restore`,
+        data
+      );
       return res.data;
-    }
+    },
   });
 };
 

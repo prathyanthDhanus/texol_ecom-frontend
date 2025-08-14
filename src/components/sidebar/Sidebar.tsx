@@ -8,11 +8,17 @@ interface SidebarProps {
   OpenSidebar: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ openSidebarToggle, OpenSidebar }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  openSidebarToggle,
+  OpenSidebar,
+}) => {
   const activePath = useAppSelector((state) => state.navigation.activePath);
 
   return (
-    <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive" : ""}>
+    <aside
+      id="sidebar"
+      className={openSidebarToggle ? "sidebar-responsive" : ""}
+    >
       <div className="sidebar-title">
         <div className="sidebar-brand">
           {/* Example: first icon from structure */}
@@ -25,14 +31,16 @@ const Sidebar: React.FC<SidebarProps> = ({ openSidebarToggle, OpenSidebar }) => 
 
       <ul className="sidebar-list">
         {sidebarStructure.map((item) => (
-          <li
-            key={item.name}
-            className={`sidebar-list-item ${activePath === item.link ? "active" : ""}`}
-          >
-            <NavLink to={item.link}>
+          <NavLink to={item.link}>
+            <li
+              key={item.name}
+              className={`sidebar-list-item ${
+                activePath === item.link ? "active" : ""
+              }`}
+            >
               {item.icon} {item.name}
-            </NavLink>
-          </li>
+            </li>
+          </NavLink>
         ))}
       </ul>
     </aside>

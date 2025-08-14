@@ -4,7 +4,7 @@ export const Admin_Path = {
   PAGE_NOT_FOUND: "*",
   NOT_FOUND: "/not-found",
   UNAUTHORIZED: "/unauthorized",
-  FORBIDDEN:"/forbidden",
+  FORBIDDEN: "/forbidden",
 
   //・・・・・・・・・・ Auth paths ・・・・・・・・・・
 
@@ -14,9 +14,10 @@ export const Admin_Path = {
   //・・・・・・・・・・ Dashboard paths ・・・・・・・・・・
 
   HOME: "/",
-  ADD_CATEGORY:"/add/category",
-  VIEW_CATEGORIES:"/category",
-  EDIT_CATEGORY:"/edit/category/:id"
-  
-
+  ADD_CATEGORY: "/add/category",
+  VIEW_CATEGORIES: "/category",
+  EDIT_CATEGORY: "/edit/category/:id",
+  ADD_PRODUCT: "/add/product",
+  EDIT_PRODUCT: "/edit/product/:id",
+  VIEW_PRODUCTS: "/products",
 } as const;

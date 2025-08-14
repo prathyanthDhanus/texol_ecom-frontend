@@ -1,8 +1,7 @@
 import React from "react";
 import {
   BsFillBellFill,
-  BsFillEnvelopeFill,
-  BsPersonCircle,
+
   BsSearch,
   BsJustify,
 } from "react-icons/bs";
@@ -36,8 +35,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ OpenSidebar }) => {
       </div>
       <div className="header-right" style={{ cursor: "pointer" }}>
         <BsFillBellFill className="icon" />
-        <BsFillEnvelopeFill className="icon" />
-        <BsPersonCircle className="icon" />
+     
         <IoMdLogOut className="icon" onClick={handleLogout} />
       </div>
     </header>
