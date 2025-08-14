@@ -4,12 +4,13 @@ import type { TypedUseSelectorHook } from "react-redux";
 
 import navigationReducer from "./slices/navigationSlice";
 import categoryReducer from "./slices/categorySlice";
-
+import authReducer from "./slices/authSlice";
 
 export const store = configureStore({
   reducer: {
     navigation: navigationReducer,
-    category:categoryReducer
+    category:categoryReducer,
+     auth: authReducer,
   },
 });
 

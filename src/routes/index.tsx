@@ -6,6 +6,7 @@ import { generateRoutes } from "../utils/routes/generateRoutes";
 import RootLayout from "../layouts";
 import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
+import ProtectedRoute from "./adminRoutes/ProtectedRoute";
 
 export const useRouter = () => {
   return useMemo(() => {
@@ -20,11 +21,12 @@ export const useRouter = () => {
           },
           // Admin routes
           {
-            element: <AdminLayout />,
-            children: [
-              ...generateRoutes(adminRoutesConfig.dashboard),
-          
-            ],
+            element: (
+              <ProtectedRoute requiredRole="admin">
+                <AdminLayout />
+              </ProtectedRoute>
+            ),
+            children: [...generateRoutes(adminRoutesConfig.dashboard)],
           },
           // Common routes
           ...generateRoutes(adminRoutesConfig.common),
