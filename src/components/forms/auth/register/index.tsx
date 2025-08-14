@@ -1,26 +1,12 @@
-import React from 'react';
-import type { FormikProps } from 'formik';
-import FormInput from '../../../input/index';
-import Button from '../../../buttons/Button';
+import React from "react";
 
-interface RegisterFormProps {
-  formik: FormikProps<{
-    userName: string;
-    email: string;
-    password: string;
-  }>;
-  isLoading: boolean;
-}
+import type { RegisterFormProps } from "../../../../types/auth";
+import FormInput from "../../../input/index";
+import Button from "../../../buttons/Button";
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ formik, isLoading }) => {
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-  } = formik;
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    formik;
 
   return (
     <form onSubmit={handleSubmit} className="auth-form">
@@ -28,13 +14,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formik, isLoading }) => {
       <FormInput
         inputType="input"
         type="text"
-        name="userName"
+        name="username"
         label="Username"
         placeholder="Enter your username"
-        value={values.userName || ''}
+        value={values.username || ""}
         onChange={handleChange}
         onBlur={handleBlur}
-        error={touched.userName && errors.userName ? errors.userName : undefined}
+        error={
+          touched.username && errors.username ? errors.username : undefined
+        }
       />
 
       {/* Existing email and password fields */}
@@ -59,7 +47,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formik, isLoading }) => {
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
-        error={touched.password && errors.password ? errors.password : undefined}
+        error={
+          touched.password && errors.password ? errors.password : undefined
+        }
       />
 
       <Button
@@ -68,7 +58,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formik, isLoading }) => {
         disabled={isLoading || formik.isSubmitting}
         fullWidth
       >
-        {isLoading ? 'Registering...' : 'Register'}
+        {isLoading ? "Registering..." : "Register"}
       </Button>
     </form>
   );
