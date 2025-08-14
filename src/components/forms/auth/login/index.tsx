@@ -1,17 +1,8 @@
 import React from "react";
-import type { FormikProps } from "formik";
+
+import type { LoginFormProps } from "../../../../types/auth";
 import FormInput from "../../../input/index";
 import Button from "../../../buttons/Button";
-
-interface LoginFormValues {
-  email: string;
-  password: string;
-}
-
-interface LoginFormProps {
-  formik: FormikProps<LoginFormValues>;
-  isLoading?: boolean;
-}
 
 const LoginForm: React.FC<LoginFormProps> = ({ formik, isLoading }) => {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
