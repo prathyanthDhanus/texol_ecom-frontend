@@ -17,6 +17,8 @@ export const lazyComponents = {
   AddProduct: lazy(() => import("../../pages/admin/product/AddProduct")),
   ViewProducts: lazy(() => import("../../pages/admin/product/ViewProduct")),
   EditProduct: lazy(() => import("../../pages/admin/product/EditProduct")),
+  ViewOrders: lazy(() => import("../../pages/admin/order/ViewOrders")),
+  OrderDetail: lazy(() => import("../../pages/admin/order/OrderDetail")),
   //------------------- Auth Components ----------------------
   Login: lazy(() => import("../../pages/admin/auth/LoginPage")),
   Register: lazy(() => import("../../pages/admin/auth/RegisterPage")),
@@ -73,6 +75,18 @@ export const adminRoutesConfig = {
     {
       path: Admin_Path.VIEW_PRODUCTS,
       component: lazyComponents.ViewProducts,
+      protected: true,
+      roles: ["admin"],
+    },
+    {
+      path: Admin_Path.ORDER_DETAIL,
+      component: lazyComponents.OrderDetail,
+      protected: true,
+      roles: ["admin"],
+    },
+    {
+      path: Admin_Path.VIEW_ORDERS,
+      component: lazyComponents.ViewOrders,
       protected: true,
       roles: ["admin"],
     },
