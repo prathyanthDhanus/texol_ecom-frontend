@@ -6,13 +6,13 @@ export const lazyComponents = {
   //------------------ Common Components ----------------------
   PageNotFound: lazy(() => import("../../components/statuses/PageNotFound")),
   Unauthorized: lazy(() => import("../../components/statuses/Unauthorized")),
+  Forbidden: lazy(() => import("../../components/statuses/Forbidden")),
   //------------------- Dashboard Components ----------------------
   Dashboard: lazy(() => import("../../pages/admin/dashboard/index")),
   AddCategory: lazy(() => import("../../pages/admin/category/AddCategory")),
   //------------------- Auth Components ----------------------
   Login: lazy(() => import("../../pages/admin/auth/LoginPage")),
   Register: lazy(() => import("../../pages/admin/auth/RegisterPage")),
-
 };
 
 // Route configuration interface
@@ -48,8 +48,16 @@ export const adminRoutesConfig = {
       component: lazyComponents.PageNotFound,
     },
     {
+      path: Admin_Path.NOT_FOUND, // Display the "Not Found" page from the Axios interceptor
+      component: lazyComponents.PageNotFound,
+    },
+    {
       path: Admin_Path.UNAUTHORIZED,
       component: lazyComponents.Unauthorized,
+    },
+    {
+      path: Admin_Path.FORBIDDEN,
+      component: lazyComponents.Forbidden,
     },
   ],
   auth: [

@@ -62,10 +62,10 @@ axiosInstance.interceptors.response.use(
           window.location.href = "/login";
           break;
         case 403:
-          // Handle forbidden access
+          window.location.href = "/forbidden";
           break;
         case 404:
-          // Handle not found
+          window.location.href = "/not-found";
           break;
         case 500:
           if (originalRequest.retry) {
