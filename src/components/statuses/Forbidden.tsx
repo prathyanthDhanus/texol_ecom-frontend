@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaHome, FaLock, FaEnvelope } from "react-icons/fa";
+import {  FaLock, FaEnvelope } from "react-icons/fa";
+import { IoMdLogIn } from "react-icons/io";
 
 interface ForbiddenProps {
   className?: string;
@@ -144,9 +145,9 @@ const Forbidden: React.FC<ForbiddenProps> = ({
 
         <div className="action-buttons">
           {showHomeButton && (
-            <Link to="/" className="button button-primary">
-              <FaHome className="button-icon" />
-              Return Home
+            <Link to="/login" className="button button-primary">
+              <IoMdLogIn className="button-icon" />
+              Login
             </Link>
           )}
 

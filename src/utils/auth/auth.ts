@@ -13,8 +13,8 @@ export const getToken = (): string | null => {
 export const clearToken = (): void => {
   localStorage.removeItem("authToken");
   sessionStorage.removeItem("authToken");
+  clearRefreshToken();
 };
-
 // ================== Set token to the appropriate storage =====================
 
 export const setToken = (token: string, remember = false): void => {
@@ -61,4 +61,26 @@ export const isTokenExpired = (): boolean => {
     console.error("error:", error);
     return true;
   }
+};
+
+// ================== Get refresh token from the storage =====================
+export const getRefreshToken = (): string | null => {
+  return (
+    localStorage.getItem("refreshToken") ||
+    sessionStorage.getItem("refreshToken")
+  );
+};
+
+// ================== Set refresh token to the storage =====================
+export const setRefreshToken = (token: string, remember = false): void => {
+  if (remember) {
+    localStorage.setItem("refreshToken", token);
+  } else {
+    sessionStorage.setItem("refreshToken", token);
+  }
+};
+// ================== Delete refresh token from the storage =====================
+export const clearRefreshToken = (): void => {
+  localStorage.removeItem("refreshToken");
+  sessionStorage.removeItem("refreshToken");
 };

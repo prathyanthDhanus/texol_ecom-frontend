@@ -1,7 +1,7 @@
 .data-table-container {
   width: 100%;
   margin: 1rem 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .table-responsive {
@@ -12,6 +12,7 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1rem;
+    color: #000000;
 }
 
 .data-table th {
@@ -19,7 +20,7 @@
   padding: 12px 15px;
   text-align: left;
   font-weight: 600;
-  color: #495057;
+  color: #495057; 
   border-bottom: 2px solid #dee2e6;
 }
 
@@ -27,6 +28,7 @@
   padding: 12px 15px;
   border-bottom: 1px solid #dee2e6;
   vertical-align: top;
+   color: #000000;
 }
 
 .data-table tr:hover td {
@@ -36,7 +38,7 @@
 .loading-cell, .empty-cell {
   text-align: center !important;
   padding: 2rem !important;
-  color: #6c757d;
+  color: #113d63;
 }
 
 .loading-cell {

@@ -22,7 +22,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ formik, isLoading }) => {
     <form onSubmit={handleSubmit} className="auth-form">
       <FormInput
         inputType="input"
-        type="email"
+        type="text"
         name="name"
         label="Category name"
         placeholder="Enter category name"

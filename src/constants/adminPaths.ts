@@ -14,7 +14,9 @@ export const Admin_Path = {
   //・・・・・・・・・・ Dashboard paths ・・・・・・・・・・
 
   HOME: "/",
-  ADD_CATEGORY:"/add/category"
+  ADD_CATEGORY:"/add/category",
+  VIEW_CATEGORIES:"/category",
+  EDIT_CATEGORY:"/edit/category/:id"
   
 
 } as const;

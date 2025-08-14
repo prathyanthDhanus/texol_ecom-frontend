@@ -11,7 +11,7 @@ import {
 export const sidebarStructure = [
   { name: "Dashboard", link: "/", icon: <BsGrid1X2Fill className="icon" /> },
   { name: "Products", link: "/products", icon: <BsFillArchiveFill className="icon" /> },
-  { name: "Categories", link: "/add/category", icon: <BsFillGrid3X3GapFill className="icon" /> },
+  { name: "Categories", link: "/category", icon: <BsFillGrid3X3GapFill className="icon" /> },
   { name: "Customers", link: "/customers", icon: <BsPeopleFill className="icon" /> },
   { name: "Inventory", link: "/inventory", icon: <BsListCheck className="icon" /> },
   { name: "Reports", link: "/reports", icon: <BsMenuButtonWideFill className="icon" /> },
