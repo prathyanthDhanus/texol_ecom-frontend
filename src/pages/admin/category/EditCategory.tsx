@@ -8,6 +8,7 @@ import CategoryForm from "../../../components/forms/category";
 import useCategoryForm from "../../../components/forms/category/useCategoryForm";
 import { toastSuccess, toastError } from "../../../utils/toast/toast";
 import type { CategoryFormValues } from "../../../types/category";
+import "./category.css"
 
 const EditCategory = () => {
   const { id } = useParams<{ id: string }>();
@@ -59,8 +60,8 @@ const EditCategory = () => {
   }
 
   return (
-    <div className="edit-category-container">
-      <h1>Edit Category</h1>
+    <div className="add-category-container">
+      <h1 className="add-category-title">Edit Category</h1>
       <CategoryForm formik={formik} isLoading={updateCategoryLoading} />
     </div>
   );

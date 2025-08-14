@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiEdit2, FiTrash2, FiRefreshCw } from "react-icons/fi";
+import { useDispatch } from "react-redux";
 
 import DataTable from "../../../components/table/DataTable";
 import {
@@ -11,9 +12,7 @@ import {
 import { toastSuccess, toastError } from "../../../utils/toast/toast";
 import Button from "../../../components/buttons/Button";
 import { setCategories } from "../../../store/slices/categorySlice";
-
 import "./category.css";
-import { useDispatch } from "react-redux";
 
 interface Category {
   _id: string;
@@ -23,15 +22,25 @@ interface Category {
   createdAt: string;
 }
 
+interface PaginatedResponse<T> {
+  data: T[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
 const ViewCategory = () => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const {
-    data: categories,
+    data: categoriesResponse,
     isLoading: loadingCategories,
     error: errorCategories,
     refetch: refetchCategories,
-  } = useGetCategories();
+  } = useGetCategories(page, limit);
 
   const {
     mutate: deleteCategory,
@@ -46,6 +55,10 @@ const ViewCategory = () => {
     isPending: restoreCategoryLoading,
     isSuccess: restoreCategorySuccess,
   } = useRestoreCategory();
+
+  // Extract data and pagination info
+  const categories = categoriesResponse?.data || [];
+  const totalItems = categoriesResponse?.total || 0;
 
   useEffect(() => {
     if (deleteCategorySuccess || restoreCategorySuccess) {
@@ -93,6 +106,10 @@ const ViewCategory = () => {
         data: { isDeleted: false } 
       });
     }
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
   };
 
   const columns = [
@@ -154,23 +171,49 @@ const ViewCategory = () => {
     <div className="view-category-container">
       <div className="category-button-container">
         <h2>Categories</h2>
-        <Button 
-          onClick={() => navigate("/add/category")}
-          disabled={deleteCategoryLoading || restoreCategoryLoading}
-        >
-          Add Category
-        </Button>
+        <div className="category-actions">
+       
+          <Button 
+            onClick={() => navigate("/add/category")}
+            disabled={deleteCategoryLoading || restoreCategoryLoading}
+            className="add-category-btn"
+          >
+            Add Category
+          </Button>
+        </div>
       </div>
       {errorCategories && (
         <div className="error-message">{errorCategories.message}</div>
       )}
       <DataTable<Category>
-        data={categories || []}
+        data={categories}
         columns={columns}
         isLoading={loadingCategories || deleteCategoryLoading || restoreCategoryLoading}
         emptyMessage="No categories found"
-      />
+        pageSize={limit}
+        currentPage={page}
+        onPageChange={handlePageChange}
+        totalItems={totalItems}
+      />  
+      <div style={{display:"flex",justifyContent:"end"}}>
+         <select
+            value={limit}
+            onChange={(e) => {
+              setLimit(Number(e.target.value));
+              setPage(1); // Reset to first page when changing items per page
+            }}
+            disabled={loadingCategories}
+            className="limit-selector"
+          >
+            <option value="5">5 per page</option>
+            <option value="10">10 per page</option>
+            <option value="20">20 per page</option>
+            <option value="50">50 per page</option>
+          </select>
+      </div>
+      
     </div>
+    
   );
 };
 
