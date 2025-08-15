@@ -6,7 +6,9 @@ import navigationReducer from "./slices/navigationSlice";
 import categoryReducer from "./slices/categorySlice";
 import authReducer from "./slices/authSlice";
 import productReducer from "./slices/productSlice";
-import orderReducer from './slices/orderSlice';
+import orderReducer from "./slices/orderSlice";
+import socketMiddleware from "../utils/middleWares/socketMiddleware";
+import socketReducer from "./slices/socketSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,8 +16,11 @@ export const store = configureStore({
     category: categoryReducer,
     auth: authReducer,
     product: productReducer,
-        orders: orderReducer,
+    orders: orderReducer,
+    socket: socketReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(socketMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
