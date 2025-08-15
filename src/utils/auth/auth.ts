@@ -1,5 +1,12 @@
 import { jwtDecode } from "jwt-decode";
-
+import type { User } from "../../types/auth";
+export interface TokenPayload {
+  userId?: string;
+  role?: string;
+  email?: string;
+  username?: string;
+  exp?: number;
+}
 // ================== Get token from local or session storage =====================
 
 export const getToken = (): string | null => {
@@ -22,6 +29,29 @@ export const setToken = (token: string, remember = false): void => {
     localStorage.setItem("authToken", token);
   } else {
     sessionStorage.setItem("authToken", token);
+  }
+};
+// ================== Get user from token =====================
+export const getUserFromToken = (): User | null => {
+  const token = getToken();
+  if (!token) return null;
+
+  try {
+    const decoded = jwtDecode<TokenPayload>(token);
+
+    if (!decoded.userId || !decoded.role) {
+      return null;
+    }
+
+    return {
+      id: decoded.userId,
+      email: decoded.email || "",
+      username: decoded.username || "",
+      role: decoded.role,
+    };
+  } catch (error) {
+    console.error("Invalid token format", error);
+    return null;
   }
 };
 
