@@ -8,18 +8,18 @@ export const Admin_Path = {
 
   //・・・・・・・・・・ Auth paths ・・・・・・・・・・
 
-  LOGIN: "/login",
-  REGISTER: "/register",
+  LOGIN: "admin/login",
+  REGISTER: "register",
 
   //・・・・・・・・・・ Dashboard paths ・・・・・・・・・・
 
-  HOME: "/",
-  ADD_CATEGORY: "/add/category",
-  VIEW_CATEGORIES: "/category",
-  EDIT_CATEGORY: "/edit/category/:id",
-  ADD_PRODUCT: "/add/product",
-  EDIT_PRODUCT: "/edit/product/:id",
-  VIEW_PRODUCTS: "/products",
-  VIEW_ORDERS: "/orders",
-  ORDER_DETAIL: "/orders/:orderId",
+  HOME: "",
+  ADD_CATEGORY: "add/category",
+  VIEW_CATEGORIES: "category",
+  EDIT_CATEGORY: "edit/category/:id",
+  ADD_PRODUCT: "add/product",
+  EDIT_PRODUCT: "edit/product/:id",
+  VIEW_PRODUCTS: "products",
+  VIEW_ORDERS: "orders",
+  ORDER_DETAIL: "orders/:orderId",
 } as const;

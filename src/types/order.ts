@@ -30,7 +30,7 @@ export interface Order {
 }
 
 export interface PaginatedOrders {
-  orders: Order[];
+  data: Order[];
   total: number;
   page: number;
   totalPages: number;

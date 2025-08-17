@@ -8,7 +8,7 @@ export const lazyComponents = {
   Unauthorized: lazy(() => import("../../components/statuses/Unauthorized")),
   Forbidden: lazy(() => import("../../components/statuses/Forbidden")),
   //------------------- Dashboard Components ----------------------
-  Dashboard: lazy(() => import("../../pages/admin/dashboard/index")),
+  Dashboard: lazy(() => import("../../pages/admin/dashboard/AdminDashboard")),
   AddCategory: lazy(() => import("../../pages/admin/category/AddCategory")),
   ViewCategories: lazy(
     () => import("../../pages/admin/category/ViewCategories")

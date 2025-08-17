@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
 
 import LoginImage from "../../../assets/images/2151252489.jpg";
@@ -15,27 +15,34 @@ const RegisterPage = () => {
   // Register api hook
   const {
     mutate: register,
-    isPending: isLoading,
+    isPending: isApiLoading,
     isSuccess: registerSuccess,
     error: registerError,
     data: registerData,
   } = useRegister();
+  
+  // Local loading state to handle the entire registration process
+  const [isLoading, setIsLoading] = useState(false);
 
   // Register form submission function
   const handleSubmit = (values: RegisterFormValues) => {
+    // Set loading state to true
+    setIsLoading(true);
+    
     register(values, {
+      onSuccess: (data) => {
+        toastSuccess(data.message || "Registration successful!");
+        navigate("/login");
+      },
       onError: (error) => {
         toastError(error.message || "Registration failed. Please try again.");
+        // Set loading state to false on error
+        setIsLoading(false);
       },
     });
-  };
+  };  
 
-  useEffect(() => {
-    if (registerSuccess && registerData) {
-      toastSuccess(registerData.message || "Registration successful!");
-      navigate("/login");
-    }
-  }, [registerSuccess, registerData, navigate]);
+
 
   const formik = useRegisterForm(handleSubmit);
 

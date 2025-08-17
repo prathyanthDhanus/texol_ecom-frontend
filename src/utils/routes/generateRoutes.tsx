@@ -1,12 +1,14 @@
 import React, { memo, useMemo } from "react";
 
 import ProtectedRoute from "../../routes/adminRoutes/ProtectedRoute";
+import CustomerProtectedRoute from "../../routes/customerRoutes/CustomerProtectedRoute";
 import LazyRoute from "../lazyLoading/LazyRoute";
 
 interface RouteConfig {
   path: string;
   component: React.LazyExoticComponent<React.ComponentType<any>>;
   protected?: boolean;
+  customerProtected?: boolean;
 }
 
 interface SimpleRoute {
@@ -17,17 +19,22 @@ interface SimpleRoute {
 interface RouteElementProps {
   component: React.LazyExoticComponent<React.ComponentType<any>>;
   protected?: boolean;
+  customerProtected?: boolean;
 }
 
 const RouteElement: React.FC<RouteElementProps> = memo(
-  ({ component, protected: isProtected }) => {
+  ({ component, protected: isProtected, customerProtected }) => {
     const lazyElement = <LazyRoute component={component} />;
 
-    return isProtected ? (
-      <ProtectedRoute>{lazyElement}</ProtectedRoute>
-    ) : (
-      lazyElement
-    );
+    if (isProtected) {
+      return <ProtectedRoute>{lazyElement}</ProtectedRoute>;
+    }
+
+    if (customerProtected) {
+      return <CustomerProtectedRoute>{lazyElement}</CustomerProtectedRoute>;
+    }
+
+    return lazyElement;
   }
 );
 
@@ -37,7 +44,11 @@ export const generateRoutes = (config: RouteConfig[]): SimpleRoute[] => {
   return config.map((route) => ({
     path: route.path,
     element: (
-      <RouteElement component={route.component} protected={route.protected} />
+      <RouteElement 
+        component={route.component} 
+        protected={route.protected}
+        customerProtected={route.customerProtected}
+      />
     ),
   }));
 };

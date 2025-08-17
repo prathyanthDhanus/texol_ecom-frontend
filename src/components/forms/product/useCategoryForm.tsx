@@ -21,7 +21,14 @@ const validationSchema = Yup.object({
     .min(10, "Description must be at least 10 characters"),
   price: Yup.number()
     .required("Price is required")
-    .min(0, "Price must be positive"),
+    .min(0, "Price must be positive")
+    .transform((value, originalValue) => {
+      if (typeof originalValue === 'string') {
+        // Convert to number with proper decimal precision
+        return parseFloat(parseFloat(originalValue).toFixed(2));
+      }
+      return value;
+    }),
   category: Yup.string().required("Category is required"),
   stock: Yup.number()
     .required("Stock quantity is required")
@@ -34,18 +41,48 @@ const validationSchema = Yup.object({
         (value) => value && value.size <= 1024 * 1024 * 5 // 5MB
       )
     )
-    .min(1, "At least one image is required")
     .required("Images are required"),
+});
+
+//------------ Validation Schema for Edit (no minimum image requirement) ----------
+const editValidationSchema = Yup.object({
+  name: Yup.string().required("Product name is required"),
+  description: Yup.string()
+    .required("Description is required")
+    .min(10, "Description must be at least 10 characters"),
+  price: Yup.number()
+    .required("Price is required")
+    .min(0, "Price must be positive")
+    .transform((value, originalValue) => {
+      if (typeof originalValue === 'string') {
+        // Convert to number with proper decimal precision
+        return parseFloat(parseFloat(originalValue).toFixed(2));
+      }
+      return value;
+    }),
+  category: Yup.string().required("Category is required"),
+  stock: Yup.number()
+    .required("Stock quantity is required")
+    .min(0, "Stock must be positive"),
+  images: Yup.array()
+    .of(
+      Yup.mixed<File>().test(
+        "fileSize",
+        "File too large",
+        (value) => value && value.size <= 1024 * 1024 * 5 // 5MB
+      )
+    ),
 });
 
 const useProductForm = (
   onSubmit: (values: ProductFormValues) => void,
-  initialValues: ProductFormValues = defaultInitialValues
+  initialValues: ProductFormValues = defaultInitialValues,
+  isEditMode: boolean = false
 ) => {
   return useFormik({
     initialValues,
     enableReinitialize: true,
-    validationSchema,
+    validationSchema: isEditMode ? editValidationSchema : validationSchema,
     onSubmit,
   });
 };

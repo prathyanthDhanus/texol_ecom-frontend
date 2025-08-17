@@ -2,17 +2,19 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
-import { useAppSelector } from "../../../store/store";
-import { useUpdateProduct } from "../../../services/product";
+import { useAppSelector, useAppDispatch } from "../../../store/store";
+import { useUpdateProduct, useGetProducts } from "../../../services/product";
 import ProductForm from "../../../components/forms/product";
 import type { ProductFormValues } from "../../../types/product";
 import useProductForm from "../../../components/forms/product/useCategoryForm";
 import { toastSuccess, toastError } from "../../../utils/toast/toast";
+import { updateProduct as updateProductAction } from "../../../store/slices/productSlice";
 import "./Product.css";
 
 const EditProduct: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const product = useAppSelector((state) =>
     state.product.list.find((p) => p._id === id)
   );
@@ -23,6 +25,9 @@ const EditProduct: React.FC = () => {
     error: updateError,
     isSuccess: updateSuccess,
   } = useUpdateProduct();
+
+  // Get the products query to force refetch
+  const { refetch: refetchProducts } = useGetProducts(1, 10);
 
   const [existingImages, setExistingImages] = React.useState<string[]>([]);
 
@@ -42,16 +47,26 @@ const EditProduct: React.FC = () => {
     formData.append("category", values.category); // Already string
     formData.append("stock", values.stock.toString());
 
+    // Add new images
     values.images.forEach((file) => {
       formData.append("images", file);
+    });
+
+    // Add existing images that weren't removed
+    existingImages.forEach((imageUrl) => {
+      formData.append("existingImages", imageUrl);
     });
 
     updateProduct(
       { id, data: formData },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          // Update Redux state with the updated product
+          dispatch(updateProductAction(data.data));
+          // Force refetch products to ensure fresh data
+          refetchProducts();
           toastSuccess("Product updated successfully");
-          navigate("/products");
+          navigate("/admin/products");
         },
       }
     );
@@ -70,7 +85,7 @@ const EditProduct: React.FC = () => {
     images: [],
     price: product?.price || 0,
     stock: product?.stock || 0,
-  });
+  }, true); // Enable edit mode
 
   useEffect(() => {
     if (updateError) {

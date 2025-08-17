@@ -21,7 +21,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ OpenSidebar }) => {
     if (window.confirm("Are you sure you want to logout?")) {
       clearToken(); // Clear token from localStorage
       dispatch(logout()); // Update Redux state
-      navigate("/login");
+      navigate("/auth/admin/login");
     }
   };
 

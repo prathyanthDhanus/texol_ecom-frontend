@@ -90,7 +90,7 @@ const ViewCategory = () => {
   }, [categories, dispatch]);
 
   const handleCategoryEdit = (id: string) => {
-    navigate(`/edit/category/${id}`);
+    navigate(`/admin/edit/category/${id}`);
   };
 
   const handleCategoryDelete = (id: string) => {
@@ -174,7 +174,7 @@ const ViewCategory = () => {
         <div className="category-actions">
        
           <Button 
-            onClick={() => navigate("/add/category")}
+            onClick={() => navigate("/admin/add/category")}
             disabled={deleteCategoryLoading || restoreCategoryLoading}
             className="add-category-btn"
           >

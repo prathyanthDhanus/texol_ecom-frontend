@@ -7,6 +7,7 @@ import categoryReducer from "./slices/categorySlice";
 import authReducer from "./slices/authSlice";
 import productReducer from "./slices/productSlice";
 import orderReducer from "./slices/orderSlice";
+import cartReducer from "./slices/cartSlice";
 import socketMiddleware from "../utils/middleWares/socketMiddleware";
 import socketReducer from "./slices/socketSlice";
 
@@ -17,6 +18,7 @@ export const store = configureStore({
     auth: authReducer,
     product: productReducer,
     orders: orderReducer,
+    cart: cartReducer,
     socket: socketReducer,
   },
   middleware: (getDefaultMiddleware) =>

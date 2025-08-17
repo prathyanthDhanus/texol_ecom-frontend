@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-
+import AuthInitializer from "./components/AuthInitializer";
 import { useRouter } from "./routes";
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
 
   return (
     <>
+      <AuthInitializer />
       <RouterProvider router={router} />
     </>
   );
