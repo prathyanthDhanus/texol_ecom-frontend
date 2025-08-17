@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FiEdit2, FiTrash2, FiRefreshCw } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 
@@ -76,8 +76,15 @@ const ViewProducts: React.FC = () => {
     }
   }, [products, dispatch]);
 
+  const location = useLocation();
+
+  // Refetch products when location changes (user navigates back)
+  useEffect(() => {
+    refetchProducts();
+  }, [location.pathname, refetchProducts]);
+
   const handleProductEdit = (id: string) => {
-    navigate(`/edit/product/${id}`);
+    navigate(`/admin/edit/product/${id}`);
   };
 
   const handleProductDelete = (id: string) => {
@@ -113,7 +120,7 @@ const ViewProducts: React.FC = () => {
     {
       key: "price",
       header: "Price",
-      render: (item: Product) => `$${item.price.toFixed(2)}`,
+      render: (item: Product) => `$${Number(item.price).toFixed(2)}`,
       width: "10%",
     },
     {
@@ -172,7 +179,7 @@ const ViewProducts: React.FC = () => {
         <h2>Products</h2>
         <div className="product-actions">
           <Button 
-            onClick={() => navigate("/add/product")}
+            onClick={() => navigate("/admin/add/product")}
             disabled={deleteLoading || restoreLoading}
             className="add-product-btn"
           >

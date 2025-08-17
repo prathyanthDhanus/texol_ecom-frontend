@@ -38,7 +38,7 @@ const EditCategory = () => {
       {
         onSuccess: () => {
           toastSuccess("Category updated successfully");
-          navigate("/category");
+          navigate("/admin/category");
         },
       }
     );

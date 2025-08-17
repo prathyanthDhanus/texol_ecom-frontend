@@ -1,7 +1,5 @@
 import React from "react";
-
-import { getRoleFromToken } from "../../utils/auth/auth";
-import { getToken } from "../../utils/auth/auth";
+import { useAppSelector } from "../../store/store";
 
 import Unauthorized from "../../components/statuses/Unauthorized";
 import Forbidden from "../../components/statuses/Forbidden";
@@ -11,26 +9,25 @@ interface ProtectedRouteProps {
   requiredRole?: string;
 }
 
-const isAuthenticated = (): boolean => {
-  const token = getToken();
-  return Boolean(token);
-};
-
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   requiredRole = "admin",
 }) => {
-  const authenticated = isAuthenticated();
-  const userRole = getRoleFromToken();
+  const { user, isAuthenticated } = useAppSelector((state) => state.auth);
 
-  if (!authenticated) {
+
+
+  if (!isAuthenticated) {
+
     return <Unauthorized />;
   }
 
-  if (userRole !== requiredRole) {
+  if (user?.role?.toLowerCase() !== requiredRole.toLowerCase()) {
+
     return <Forbidden />;
   }
 
+  
   return <>{children}</>;
 };
 

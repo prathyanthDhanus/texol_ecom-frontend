@@ -11,7 +11,7 @@ import type { PaginatedResponse } from "../types/pagination";
 export const useCreateCategory = () => {
   return useMutation<CategoryResponse, Error, CategoryFormValues>({
     mutationFn: async (categoryData) => {
-      const res = await api.post<CategoryResponse>("/category", categoryData);
+      const res = await api.post<CategoryResponse>("/categories", categoryData);
       return res.data;
     },
   });
@@ -24,7 +24,7 @@ export const useGetCategories = (page: number = 1, limit: number = 10) => {
     queryKey: ["categories", page, limit],
     queryFn: async () => {
       const res = await api.get<{ data: CategoryData[]; total: number }>(
-        `/category?page=${page}&limit=${limit}`
+        `/categories?page=${page}&limit=${limit}`
       );
       return {
         data: res.data.data,
@@ -43,7 +43,7 @@ export const useUpdateCategory = () => {
     { id: string; data: CategoryFormValues }
   >({
     mutationFn: async ({ id, data }) => {
-      const res = await api.put<CategoryResponse>(`/category/${id}`, data);
+      const res = await api.put<CategoryResponse>(`/categories/${id}`, data);
       return res.data;
     },
   });
@@ -58,7 +58,7 @@ export const useRestoreCategory = () => {
   >({
     mutationFn: async ({ id, data }) => {
       const res = await api.patch<CategoryResponse>(
-        `/category/${id}/restore`,
+        `/categories/${id}/restore`,
         data
       );
       return res.data;
@@ -70,7 +70,7 @@ export const useRestoreCategory = () => {
 export const useDeleteCategory = () => {
   return useMutation<CategoryResponse, Error, string>({
     mutationFn: async (id) => {
-      const res = await api.patch<CategoryResponse>(`/category/${id}`);
+      const res = await api.patch<CategoryResponse>(`/categories/${id}`);
       return res.data;
     },
   });

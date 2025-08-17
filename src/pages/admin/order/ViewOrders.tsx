@@ -24,7 +24,7 @@ const ViewOrders: React.FC = () => {
   }, [ordersData, dispatch]);
 
   const handleViewOrder = (id: string) => {
-    navigate(`/orders/${id}`);
+    navigate(`/admin/orders/${id}`);
   };
 
   const handlePageChange = (newPage: number) => {
