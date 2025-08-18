@@ -70,7 +70,7 @@ const RegisterPage = () => {
 
         <div className="auth-footer">
           <span className="auth-footer-text">Already have an account?</span>
-          <Link to="/login" className="auth-footer-link">
+          <Link to="/auth/admin/login" className="auth-footer-link">
             Login
           </Link>
         </div>

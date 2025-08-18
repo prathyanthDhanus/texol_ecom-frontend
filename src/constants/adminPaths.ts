@@ -9,7 +9,7 @@ export const Admin_Path = {
   //・・・・・・・・・・ Auth paths ・・・・・・・・・・
 
   LOGIN: "admin/login",
-  REGISTER: "register",
+  REGISTER: "admin/register",
 
   //・・・・・・・・・・ Dashboard paths ・・・・・・・・・・
 
