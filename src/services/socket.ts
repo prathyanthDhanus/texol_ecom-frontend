@@ -1,4 +1,4 @@
-import { io, Socket } from "socket.io-client";
+import { Socket, io } from "socket.io-client";
 import { getToken } from "../utils/auth/auth";
 
 class SocketService {

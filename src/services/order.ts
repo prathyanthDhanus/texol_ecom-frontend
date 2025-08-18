@@ -21,7 +21,7 @@ export const useGetOrder = (orderId: string) => {
   return useQuery<Order, Error>({
     queryKey: ["order", orderId],
     queryFn: async () => {
-      const res = await api.get<Order>(`/orders/${orderId}`);
+      const res = await api.get<{ data: Order }>(`/orders/${orderId}`);
       return res.data.data;
     },
     enabled: !!orderId,

@@ -18,19 +18,19 @@ export const useOrderUpdates = () => {
 
     // Listen for order status updates
     socket.on("orderStatusUpdated", (updatedOrder) => {
-      toast.info(
+      toast.success(
         `Order #${updatedOrder._id.substring(0, 8)} status updated to ${
           updatedOrder.status
         }`
       );
-      queryClient.invalidateQueries(["orders"]);
-      queryClient.invalidateQueries(["order", updatedOrder._id]);
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+      queryClient.invalidateQueries({ queryKey: ["order", updatedOrder._id] });
     });
 
     // Listen for new orders (admin dashboard)
     socket.on("newOrder", (newOrder) => {
       toast.success(`New order received: #${newOrder._id.substring(0, 8)}`);
-      queryClient.invalidateQueries(["orders"]);
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
     });
 
     // Listen for stock changes
