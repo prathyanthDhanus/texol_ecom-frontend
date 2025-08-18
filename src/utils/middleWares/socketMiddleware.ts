@@ -6,6 +6,8 @@ import {
   socketError,
 } from "../../store/slices/socketSlice";
 
+const SOCKET_URL = import.meta.env.VITE_API_SOCKET_URL || "http://localhost:3000";
+
 const socketMiddleware: Middleware = (store) => {
   let socket: Socket;
 
@@ -17,7 +19,7 @@ const socketMiddleware: Middleware = (store) => {
     ) {
       const { user } = action.payload;
 
-      socket = io(process.env.REACT_APP_API_URL || "http://localhost:3000", {
+      socket = io(SOCKET_URL, {
         withCredentials: true,
       });
 

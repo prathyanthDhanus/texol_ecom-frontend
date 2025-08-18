@@ -1,6 +1,7 @@
 import { Socket, io } from "socket.io-client";
 import { getToken } from "../utils/auth/auth";
 
+const SOCKET_URL = import.meta.env.VITE_API_SOCKET_URL || "http://localhost:3000";
 class SocketService {
   private socket: Socket | null = null;
   private isConnected = false;
@@ -17,7 +18,7 @@ class SocketService {
       return null;
     }
 
-    this.socket = io("http://localhost:3000", {
+    this.socket = io(SOCKET_URL, {
       auth: {
         token,
       },
