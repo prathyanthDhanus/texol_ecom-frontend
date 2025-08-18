@@ -178,7 +178,11 @@ const CustomerLoginPage = () => {
                          <Link to={`/auth/${Customer_Path.REGISTER}`} className={styles.registerLink}>
                Sign up here
              </Link>
+             
           </p>
+            <Link to="/auth/admin/login" style={{fontSize:"0.7rem"}}>
+           Admin login
+          </Link>
         </div>
       </div>
     </div>

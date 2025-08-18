@@ -114,7 +114,7 @@ const LoginPage = () => {
 
         <div className="auth-footer">
           <span className="auth-footer-text">Don't have an account?</span>
-          <Link to="/register" className="auth-footer-link">
+          <Link to="/auth/admin/register" className="auth-footer-link">
             Register
           </Link>
         </div>
