@@ -6,7 +6,7 @@ import {
   socketError,
 } from "../../store/slices/socketSlice";
 
-const SOCKET_URL = import.meta.env.VITE_API_SOCKET_URL || "http://localhost:3000";
+const SOCKET_URL = import.meta.env.VITE_API_SOCKET_URL || "https://texol-ecom-backend.onrender.com";
 
 const socketMiddleware: Middleware = (store) => {
   let socket: Socket;

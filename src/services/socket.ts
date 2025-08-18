@@ -1,7 +1,7 @@
 import { Socket, io } from "socket.io-client";
 import { getToken } from "../utils/auth/auth";
 
-const SOCKET_URL = import.meta.env.VITE_API_SOCKET_URL || "http://localhost:3000";
+const SOCKET_URL = import.meta.env.VITE_API_SOCKET_URL || "https://texol-ecom-backend.onrender.com";
 class SocketService {
   private socket: Socket | null = null;
   private isConnected = false;
